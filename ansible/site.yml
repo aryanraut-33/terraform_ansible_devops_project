@@ -1,0 +1,13 @@
+# ==============================================================================
+# Ansible Playbook: Nginx Setup & Website Deployment
+# ==============================================================================
+# Full tasks for Nginx installation and website copy will be added in Sprint 4.
+# ==============================================================================
+---
+- name: Placeholder Playbook
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Scaffold check
+      ansible.builtin.debug:
+        msg: "Ansible structure ready for Sprint 4."

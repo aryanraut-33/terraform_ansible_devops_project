@@ -1,0 +1,20 @@
+sprint_plan.md
+# Terraform State & Cache (CRITICAL: Do NOT commit)
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+*.tfvars.json
+
+# Ansible
+*.retry
+ansible.log
+
+# Private Keys & Secrets
+*.pem
+*.key
+devops_aws_key*
+
+# OS Artifacts
+.DS_Store
