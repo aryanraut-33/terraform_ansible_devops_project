@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Development Environment — DevOps Web App</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="background-glow"></div>
+
+  <div class="container">
+    <!-- Environment Header Badge -->
+    <header class="header">
+      <div class="badge dev-badge">
+        <span class="badge-icon">🛠️</span>
+        <span class="badge-text">DEVELOPMENT ENVIRONMENT</span>
+      </div>
+      <h1 class="hero-title">Welcome to <span class="highlight">Development</span></h1>
+      <p class="hero-subtitle">
+        Automated Infrastructure Provisioning &amp; Server Configuration Pipeline
+      </p>
+    </header>
+
+    <!-- Main Content Cards -->
+    <main class="grid">
+      <!-- Card 1: Infrastructure Info -->
+      <div class="card">
+        <div class="card-icon">☁️</div>
+        <h3>Infrastructure (Terraform)</h3>
+        <p>Provisioned automatically using HashiCorp Terraform.</p>
+        <ul class="meta-list">
+          <li><strong>Cloud Provider:</strong> AWS</li>
+          <li><strong>Region:</strong> ap-southeast-2 (Sydney)</li>
+          <li><strong>VPC CIDR:</strong> 10.0.0.0/16</li>
+          <li><strong>Subnet:</strong> Dev Public (10.0.1.0/24)</li>
+        </ul>
+      </div>
+
+      <!-- Card 2: Server Info -->
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Server &amp; Compute</h3>
+        <p>Configured dynamically using Red Hat Ansible automation.</p>
+        <ul class="meta-list">
+          <li><strong>Instance Type:</strong> t3.micro (Free Tier)</li>
+          <li><strong>Operating System:</strong> Amazon Linux 2023</li>
+          <li><strong>Web Server:</strong> Nginx (Reverse Proxy)</li>
+          <li><strong>Security Group:</strong> Port 22 (SSH) &amp; 80 (HTTP)</li>
+        </ul>
+      </div>
+
+      <!-- Card 3: Environment Status -->
+      <div class="card">
+        <div class="card-icon">🧪</div>
+        <h3>Environment Health</h3>
+        <p>Staging and testing branch deployment verification.</p>
+        <div class="status-box">
+          <span class="status-indicator"></span>
+          <span>Status: <strong>Development Staging Active</strong></span>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>DevOps Academic Project — K.J. Somaiya College of Engineering</p>
+      <p class="credits">Built with <strong>Terraform</strong> &amp; <strong>Ansible</strong></p>
+    </footer>
+  </div>
+</body>
+
+</html>
