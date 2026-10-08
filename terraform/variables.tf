@@ -2,11 +2,6 @@
 # Terraform Variables
 # Project: Automated Web Deployment on AWS (DevOps IA Project)
 # ==============================================================================
-# Variables make the configuration reusable and flexible.
-# Default values are provided so 'terraform apply' works without extra flags.
-# To override, use: terraform apply -var="aws_region=ap-south-1"
-# ==============================================================================
-
 
 # ------------------------------------------------------------------------------
 # General Settings
@@ -26,23 +21,40 @@ variable "project_name" {
 
 
 # ------------------------------------------------------------------------------
-# Networking — VPC & Subnet CIDRs (Sprint 1)
+# Networking (Sprint 1)
 # ------------------------------------------------------------------------------
 
 variable "vpc_cidr" {
-  description = "CIDR block for the VPC (e.g., 10.0.0.0/16 = 65,536 IPs)"
+  description = "CIDR block for the VPC"
   type        = string
   default     = "10.0.0.0/16"
 }
 
 variable "dev_subnet_cidr" {
-  description = "CIDR block for the Dev public subnet (e.g., 10.0.1.0/24 = 256 IPs)"
+  description = "CIDR block for the Dev public subnet"
   type        = string
   default     = "10.0.1.0/24"
 }
 
 variable "prod_subnet_cidr" {
-  description = "CIDR block for the Prod public subnet (e.g., 10.0.2.0/24 = 256 IPs)"
+  description = "CIDR block for the Prod public subnet"
   type        = string
   default     = "10.0.2.0/24"
+}
+
+
+# ------------------------------------------------------------------------------
+# Compute Settings (Sprint 2)
+# ------------------------------------------------------------------------------
+
+variable "instance_type" {
+  description = "EC2 Instance size (t2.micro is free-tier eligible)"
+  type        = string
+  default     = "t3.micro"
+}
+
+variable "public_key_path" {
+  description = "Path to the local SSH public key generated in Sprint 0"
+  type        = string
+  default     = "~/.ssh/devops_aws_key.pub"
 }
