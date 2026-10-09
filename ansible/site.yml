@@ -1,13 +1,109 @@
 # ==============================================================================
-# Ansible Playbook: Nginx Setup & Website Deployment
+# Ansible Playbook: Web Server Setup and Website Deployment
+# Project: Automated Web Deployment on AWS (DevOps IA Project)
+# Target OS: Amazon Linux 2023 (AL2023)
 # ==============================================================================
-# Full tasks for Nginx installation and website copy will be added in Sprint 4.
+# This playbook executes against two distinct host groups:
+#   Play 1: Targets [dev]  -> Installs Nginx and deploys Development web assets
+#   Play 2: Targets [prod] -> Installs Nginx and deploys Production web assets
 # ==============================================================================
 ---
-- name: Placeholder Playbook
-  hosts: all
-  gather_facts: false
+
+# ==============================================================================
+# PLAY 1: Configure Development Environment
+# ==============================================================================
+- name: Configure and Deploy Development Web Server
+  hosts: dev
+  become: true # Execute tasks with root (sudo) privileges
+
   tasks:
-    - name: Scaffold check
-      ansible.builtin.debug:
-        msg: "Ansible structure ready for Sprint 4."
+    - name: 1. Update DNF package cache
+      ansible.builtin.dnf:
+        update_cache: true
+
+    - name: 2. Install Nginx web server
+      ansible.builtin.dnf:
+        name: nginx
+        state: present
+
+    - name: 3. Ensure Nginx service is started and enabled on system boot
+      ansible.builtin.systemd:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: 4. Ensure Nginx web root directory exists
+      ansible.builtin.file:
+        path: /usr/share/nginx/html
+        state: directory
+        mode: '0755'
+
+    - name: 5. Deploy Development index.html
+      ansible.builtin.copy:
+        src: ../files/dev/index.html
+        dest: /usr/share/nginx/html/index.html
+        mode: '0644'
+      notify: Reload Nginx
+
+    - name: 6. Deploy Development style.css
+      ansible.builtin.copy:
+        src: ../files/dev/style.css
+        dest: /usr/share/nginx/html/style.css
+        mode: '0644'
+      notify: Reload Nginx
+
+  handlers:
+    - name: Reload Nginx
+      ansible.builtin.systemd:
+        name: nginx
+        state: reloaded
+
+
+# ==============================================================================
+# PLAY 2: Configure Production Environment
+# ==============================================================================
+- name: Configure and Deploy Production Web Server
+  hosts: prod
+  become: true # Execute tasks with root (sudo) privileges
+
+  tasks:
+    - name: 1. Update DNF package cache
+      ansible.builtin.dnf:
+        update_cache: true
+
+    - name: 2. Install Nginx web server
+      ansible.builtin.dnf:
+        name: nginx
+        state: present
+
+    - name: 3. Ensure Nginx service is started and enabled on system boot
+      ansible.builtin.systemd:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: 4. Ensure Nginx web root directory exists
+      ansible.builtin.file:
+        path: /usr/share/nginx/html
+        state: directory
+        mode: '0755'
+
+    - name: 5. Deploy Production index.html
+      ansible.builtin.copy:
+        src: ../files/prod/index.html
+        dest: /usr/share/nginx/html/index.html
+        mode: '0644'
+      notify: Reload Nginx
+
+    - name: 6. Deploy Production style.css
+      ansible.builtin.copy:
+        src: ../files/prod/style.css
+        dest: /usr/share/nginx/html/style.css
+        mode: '0644'
+      notify: Reload Nginx
+
+  handlers:
+    - name: Reload Nginx
+      ansible.builtin.systemd:
+        name: nginx
+        state: reloaded
